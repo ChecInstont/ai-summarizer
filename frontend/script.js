@@ -119,24 +119,25 @@ summarizeBtn.addEventListener("click", async () => {
   }
 });
 
-// Load history
-async function loadHistory() {
-  try {
-    const res = await fetch(`${API_BASE}/api/history?visitor_id=${VISITOR_ID}`);
-    if (!res.ok) throw new Error("Failed to load history");
-    const data = await res.json();
-    historyList.innerHTML = "";
-    data.history.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = `${new Date(item.created_at).toLocaleString()} - Model: ${item.model}\nSummary: ${item.summary_text}`;
-      historyList.appendChild(li);
-    });
-  } catch (err) {
-    console.error("History error:", err);
-  }
-}
+// // Load history
+// async function loadHistory() {
+//   try {
+//     const res = await fetch(`${API_BASE}/api/history?visitor_id=${VISITOR_ID}`);
+//     if (!res.ok) throw new Error("Failed to load history");
+//     const data = await res.json();
+//     historyList.innerHTML = "";
+//     data.history.forEach(item => {
+//       const li = document.createElement("li");
+//       li.textContent = `${new Date(item.created_at).toLocaleString()} - Model: ${item.model}\nSummary: ${item.summary_text}`;
+//       historyList.appendChild(li);
+//     });
+//   } catch (err) {
+//     console.error("History error:", err);
+//   }
+// }
 
-// Initial load
-window.onload = loadHistory;
+// // Initial load
+// window.onload = loadHistory;
 
-export const copy_visitor_id = VISITOR_ID;
+const copy_visitor_id = VISITOR_ID;
+export default copy_visitor_id;

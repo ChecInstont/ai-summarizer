@@ -1,3 +1,5 @@
+import copy_visitor_id from "./script.js";
+
 const API_BASE = ""; // Change if backend hosted elsewhere
 
 const summaryOutput = document.getElementById("summary-output");
@@ -8,7 +10,7 @@ const historyList = document.getElementById("history-list");
 // Load summary history
 async function loadHistory() {
   try {
-    const res = await fetch(`${API_BASE}/api/history`);
+    const res = await fetch(`${API_BASE}/api/history?visitor_id=${copy_visitor_id}`);
     if (!res.ok) throw new Error("Failed to load history");
     const data = await res.json();
     historyList.innerHTML = "";
