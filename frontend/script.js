@@ -108,9 +108,12 @@ summarizeBtn.addEventListener("click", async () => {
     }
 
     const resData = await response.json();
-    summaryOutput.textContent = resData.summary;
+    if (resData){
+      window.location.href = window.location.origin+"/summaries-history.html";
+    }else{
+      alert("something went wrong");
+    }
     resultSection.hidden = false;
-    loadHistory();
   } catch (err) {
     alert(err.message);
   } finally {
