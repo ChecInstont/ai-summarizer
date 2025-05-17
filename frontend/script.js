@@ -138,3 +138,5 @@ async function loadHistory() {
 
 // Initial load
 window.onload = loadHistory;
+
+export const copy_visitor_id = VISITOR_ID;
