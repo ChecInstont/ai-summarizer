@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Summaries History</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="./logo.png" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <a href="index.html">🏠 Home</a>
+      <a href="about.html">ℹ️ About</a>
+      <a href="summaries-history.html">⌛History</a>
+      <button id="themeToggle">🌓 Theme</button>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+      <div class="topbar">
+        <button id="menuBtn">☰</button>
+        <h1>AI Text Summarizer</h1>
+      </div>
+
+      <main class="container">
+        <section id="result-section" hidden>
+          <h2>Summary</h2>
+          <pre id="summary-output"></pre>
+        </section>
+
+        <section id="history-section">
+          <h2>Last Summaries</h2>
+          <ul id="history-list"></ul>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="theme.js"></script>
+  <script src="summaries-history.js"></script>
+</body>
+
+</html>

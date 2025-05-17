@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="./logo.png" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <a href="index.html">🏠 Home</a>
+      <a href="about.html">ℹ️ About</a>
+      <a href="summaries-history.html">⌛History</a>
+      <button id="themeToggle">🌓 Theme</button>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+      <div class="topbar">
+        <button id="menuBtn">☰</button>
+        <h1>AI Text Summarizer</h1>
+      </div>
+
+      <main class="container">
+        <h1>About This App</h1>
+        <br>
+
+        <p>
+          <strong>AI Text Summarizer</strong> is a modern web application designed to help users quickly and efficiently
+          generate summaries of lengthy text, PDF files, and documents using cutting-edge large language models (LLMs).
+          Whether you're a student, researcher, journalist, or just someone dealing with a lot of reading, this tool
+          streamlines your workflow by providing concise, meaningful summaries with just a few clicks.
+        </p>
+
+        <p>
+          This app supports various AI providers including OpenAI, Azure OpenAI, Anthropic, and Google's Gemini models.
+          Users can input their own API credentials and customize summarization behavior using temperature settings,
+          custom prompts, and model selection.
+        </p>
+        <br>
+        <ul style="list-style-type: none; padding-left: 0;">
+          <li><strong>Multi-provider support</strong>: Switch between OpenAI, Azure, Anthropic, or Gemini.</li>
+          <li><strong>Text & PDF upload</strong>: Easily extract and summarize content from text or PDF files.</li>
+          <li><strong>History tracking</strong>: Access and review your recent summaries.</li>
+          <li><strong>Fully client-configurable</strong>: Bring your own API key, endpoint, and model settings.</li>
+        </ul>
+        <br>
+        <p><strong>Version:</strong> 0.0.1</p>
+        <p><strong>Started by:</strong> Vishnu Vardhan Reddy</p>
+        <p><strong>Launched on:</strong> May 17, 2025</p>
+        <br>
+        <p><strong>Total Visitors:</strong> <span id="visitorCount">Loading...</span></p>
+        <p>
+          <br>
+          <strong>GitHub Repository:</strong>
+          <a href="https://github.com/vishnuvardhanreddy-vvr/AI-summarizer" target="_blank" rel="noopener noreferrer">
+            https://github.com/vishnuvardhanreddy-vvr/AI-summarizer
+          </a>
+        </p>
+
+        <br>
+        <p>
+          This project is open-source and welcomes contributions. Feel free to explore the code, raise issues, or
+          suggest improvements!
+        </p>
+
+      </main>
+
+      <script src="theme.js"></script>
+      <!-- <script>
+    fetch("/api/visitor/visit", { method: "POST" });
+    fetch("/api/visitor/count")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("visitorCount").innerText = data.count;
+      });
+  </script> -->
+
+      <script>
+        // Generate or get visitor ID from localStorage
+        function getVisitorId() {
+          let visitorId = localStorage.getItem("visitorId");
+          if (!visitorId) {
+            visitorId = crypto.randomUUID();
+            localStorage.setItem("visitorId", visitorId);
+          }
+          return visitorId;
+        }
+
+        const visitorId = getVisitorId();
+
+        // Send visitor ID to backend when visiting
+        fetch("/api/visitor/visit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Visitor-ID": visitorId
+          },
+          body: JSON.stringify({}) // send empty body or add extra info if needed
+        });
+
+        // Fetch and show visitor count
+        fetch("/api/visitor/count")
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById("visitorCount").innerText = data.count;
+          });
+      </script>
+
+</body>
+
+</html>
