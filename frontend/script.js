@@ -7,6 +7,15 @@ function getVisitorId() {
     visitorId = crypto.randomUUID();
     localStorage.setItem("visitor_id", visitorId);
   }
+  fetch("/api/visitor/visit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Visitor-ID": visitorId
+          },
+          body: JSON.stringify({}) // send empty body or add extra info if needed
+});
+  
   return visitorId;
 }
 const VISITOR_ID = getVisitorId();
