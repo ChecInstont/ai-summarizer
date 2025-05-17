@@ -1,9 +1,10 @@
+
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import summarize, upload, history, visitor
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
 
 app = FastAPI(title="AI Summarizer")
 
@@ -22,6 +23,15 @@ app.include_router(history.router, prefix="/api/history", tags=["History"])
 app.include_router(visitor.router, prefix="/api/visitor", tags=["Visitor"])
 
 
+# Optional: If you want a specific route to serve index.html explicitly
+@app.get("/api/health")
+async def health():
+    """
+    Check status of server
+    """
+    return {"status":"Ok"}
+
+
 
 # Mount the frontend folder as static files under root
 app.mount("/", StaticFiles(directory="./frontend", html=True), name="frontend")
@@ -29,4 +39,8 @@ app.mount("/", StaticFiles(directory="./frontend", html=True), name="frontend")
 # Optional: If you want a specific route to serve index.html explicitly
 @app.get("/")
 async def root():
+    """
+    Load HTML File
+    """
     return FileResponse(os.path.join("frontend", "index.html"))
+
