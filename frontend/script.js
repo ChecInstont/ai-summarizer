@@ -139,4 +139,5 @@ summarizeBtn.addEventListener("click", async () => {
 // // Initial load
 // window.onload = loadHistory;
 
-export const copy_visitor_id = VISITOR_ID;
+const copy_visitor_id = VISITOR_ID;
+export default copy_visitor_id;
