@@ -4,7 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import summarize, upload, history, visitor
+from app.routes import summarize, upload, history, visitor, delete_route
+
 
 app = FastAPI(title="AI Summarizer")
 
@@ -17,6 +18,7 @@ app.add_middleware(
 )
 
 # Register Routes
+app.include_router(delete_route.router, prefix="/api", , tags=["Delete History"])
 app.include_router(summarize.router, prefix="/api/summarize", tags=["Summarization"])
 app.include_router(upload.router, prefix="/api/upload", tags=["File Upload"])
 app.include_router(history.router, prefix="/api/history", tags=["History"])
