@@ -27,7 +27,7 @@ app.include_router(visitor.router, prefix="/api/visitor", tags=["Visitor"])
 @app.get("/api/health")
 async def health():
     """
-    Check status of server
+    Check status of backend server
     """
     return {"status":"Ok"}
 
