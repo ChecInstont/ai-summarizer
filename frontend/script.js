@@ -113,7 +113,6 @@ summarizeBtn.addEventListener("click", async () => {
     }else{
       alert("something went wrong");
     }
-    resultSection.hidden = false;
   } catch (err) {
     alert(err.message);
   } finally {
