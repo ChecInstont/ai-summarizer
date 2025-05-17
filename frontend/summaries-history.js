@@ -2,7 +2,7 @@
 
 const API_BASE = ""; // Change if backend hosted elsewhere
 
-const copy_visitor_id = window.copy_visitor_id;
+const copy_visitor_id = localStorage.getItem("visitor_id");
 
 const summaryOutput = document.getElementById("summary-output");
 const resultSection = document.getElementById("result-section");
