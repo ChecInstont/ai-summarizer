@@ -86,24 +86,10 @@
         // Generate or get visitor ID from localStorage
         function getVisitorId() {
           let visitorId = localStorage.getItem("visitorId");
-          if (!visitorId) {
-            visitorId = crypto.randomUUID();
-            localStorage.setItem("visitorId", visitorId);
-          }
           return visitorId;
         }
 
         const visitorId = getVisitorId();
-
-        // Send visitor ID to backend when visiting
-        fetch("/api/visitor/visit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Visitor-ID": visitorId
-          },
-          body: JSON.stringify({}) // send empty body or add extra info if needed
-        });
 
         // Fetch and show visitor count
         fetch("/api/visitor/count")
