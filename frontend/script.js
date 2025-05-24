@@ -31,10 +31,35 @@ const resultSection = document.getElementById("result-section");
 const apiUrlInput = document.getElementById("api-url");
 const providerInput = document.getElementById("provider");
 const apiKeyInput = document.getElementById("api-key");
+const apiVersionInput = document.getElementById("api-version");
 const modelInput = document.getElementById("model");
 const temperatureInput = document.getElementById("temperature");
 const promptInput = document.getElementById("prompt");
 const historyList = document.getElementById("history-list");
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const apiUrlWrapper = document.querySelector(".api-url-wrapper");
+  const apiVersionWrapper = document.querySelector(".api-version-wrapper");
+
+  // Initially hide
+  apiUrlWrapper.style.display = "none";
+  apiVersionWrapper.style.display = "none";
+
+  providerInput.addEventListener("change", () => {
+    if (providerInput.value === "azureopenai") {
+      apiUrlWrapper.style.display = "block";
+      apiVersionWrapper.style.display = "block";
+    } else {
+      apiUrlWrapper.style.display = "none";
+      apiVersionWrapper.style.display = "none";
+    }
+  });
+});
+
+
 
 // File upload handling
 fileInput.addEventListener("change", () => {
@@ -78,14 +103,15 @@ summarizeBtn.addEventListener("click", async () => {
 
   const api_url = apiUrlInput.value.trim();
   const api_key = apiKeyInput.value.trim();
+  const api_version = apiVersionInput.value.trim();
   const model = modelInput.value.trim();
   const temperature = parseFloat(temperatureInput.value);
   const provider = providerInput.value.trim();
   let prompt = promptInput.value.trim();
   if (!prompt) prompt = "Summarize the given text into brief info.";
 
-  if (!api_url || !api_key || !model) {
-    alert("Please fill API URL, API Key, and Model fields.");
+  if (!api_key || !model) {
+    alert("Please fill API Key and Model fields.");
     return;
   }
 
@@ -99,7 +125,7 @@ summarizeBtn.addEventListener("click", async () => {
         "Content-Type": "application/json",
         "X-Visitor-ID": VISITOR_ID
       },
-      body: JSON.stringify({ text, api_url, api_key, model, temperature, prompt, provider }),
+      body: JSON.stringify({ text, api_url, api_key, model, temperature, prompt, provider, api_version }),
     });
 
     if (!response.ok) {

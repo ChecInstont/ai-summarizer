@@ -88,7 +88,8 @@ body.dark {
   border-bottom: 1px solid var(--border);
 }
 
-#menuBtn {
+#menuBtnLeft,
+#menuBtnRight {
   font-size: 1.5rem;
   background: none;
   border: none;
@@ -96,7 +97,8 @@ body.dark {
   cursor: pointer;
 }
 
-.container {
+.container,
+.container-about {
   max-width: 800px;
   margin: auto;
   padding: 2rem 1rem;
@@ -125,6 +127,10 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+
+#summarize-btn {
+  margin-top: 100px;
 }
 
 .required {
@@ -248,5 +254,63 @@ pre {
 @media (min-width: 768px) {
   .main.with-sidebar {
     margin-left: 220px;
+  }
+  .main.with-ai-config-sidebar {
+    margin-right: 220px;
+  }
+}
+
+/* Ensure sidebar uses full height and proper scroll */
+.ai-config-sidebar {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 220px;
+  height: 100vh;
+  padding: 1rem;
+  background-color: var(--nav);
+  color: var(--fg);
+  overflow-y: auto;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-config-sidebar.open {
+  right: 0;
+}
+
+.ai-config-sidebar .config-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Ensure all inputs take full width inside sidebar */
+.ai-config-sidebar input,
+.ai-config-sidebar select,
+.ai-config-sidebar textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* Prevent overlapping on small screens */
+@media (max-width: 768px) {
+
+  .ai-config-sidebar,
+  .container {
+    display: none;
+  }
+
+  .main.shift-right {
+    margin-right: 0;
   }
 }

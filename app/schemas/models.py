@@ -15,8 +15,8 @@ Usage:
     and extract the request body fields.
 """
 
-from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import List, Literal, Optional
 
 class SummarizeRequest(BaseModel):
 
@@ -42,3 +42,38 @@ class SummarizeRequest(BaseModel):
     prompt: Optional[str] = None
     provider: Optional[str] = "gemini"
     api_version: Optional[str] = ""
+
+
+class ChatMessage(BaseModel):
+    """
+    Represents a single message in the chat history.
+
+    Attributes:
+        role (str): The role of the message sender. Should be "user" or "assistant".
+        content (str): The textual content of the message.
+    """
+    role: Literal["user", "assistant"] = Field(..., description='Role of the sender ("user" or "assistant").')
+    content: str = Field(..., description="The actual message text.")
+
+
+class ChatRequest(BaseModel):
+    """
+    Schema for AI chat requests sent to the LLM chat endpoint.
+
+    Attributes:
+        history (List[ChatMessage]): The complete conversation history as a list of messages.
+        api_url (str): The base API URL of the LLM provider.
+        api_key (str): The API key used to authenticate with the provider.
+        model (str): The name or deployment ID of the model to use.
+        temperature (float, optional): Sampling temperature (0–1). Defaults to 0.7.
+        provider (str, optional): Name of the AI provider (e.g., "openai", "azureopenai", "anthropic", "gemini"). Defaults to "gemini".
+        api_version (str, optional): Optional version identifier for APIs that require it (e.g., Azure OpenAI). Defaults to "".
+    """
+    message: str = Field(..., description="user inputs to AI.")
+    api_url: str = Field(..., description="Base API URL of the LLM provider.")
+    api_key: str = Field(..., description="API key to authenticate with the provider.")
+    model: str = Field(..., description="Model name or deployment ID.")
+    temperature: float = Field(0.7, description="Sampling temperature (0–1).")
+    provider: str = Field("gemini", description='AI provider (e.g., "openai", "azureopenai", "anthropic", "gemini").')
+    api_version: str = Field("", description="Optional version for some APIs (e.g., Azure).")
+    visitor_id: str = Field("", description="Unique ID of user.")

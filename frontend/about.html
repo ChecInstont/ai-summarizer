@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>About</title>
+  <title>AI Summarizer - About</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="./logo.png" />
 </head>
@@ -14,7 +14,8 @@
   <div id="app">
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-      <a href="index.html">🏠 Home</a>
+      <a href="/">🏠 Home</a>
+      <a href="chat.html">💬 Chat</a>
       <a href="about.html">ℹ️ About</a>
       <a href="summaries-history.html">⌛History</a>
       <button id="themeToggle">🌓 Theme</button>
@@ -23,8 +24,9 @@
     <!-- Main content -->
     <div class="main">
       <div class="topbar">
-        <button id="menuBtn">☰</button>
+        <button id="menuBtnLeft">☰</button>
         <h1>AI Text Summarizer</h1>
+        <button id="menuBtnRight" style="display: none;" disabled>☰</button>
       </div>
 
       <main class="container">
@@ -72,32 +74,58 @@
 
       </main>
 
-      <script src="theme.js"></script>
-      <!-- <script>
-    fetch("/api/visitor/visit", { method: "POST" });
+    </div>
+
+    <!-- Right Sidebar (AI Config) -->
+    <aside class="ai-config-sidebar" id="ai-config">
+      <div class="config-inner">
+        <h2>⚙️ Config</h2>
+
+        <label for="provider">Provider<span class="required">*</span></label>
+        <select id="provider" name="provider" required>
+          <option value="" disabled selected>Select a provider</option>
+          <option value="openai">OpenAI</option>
+          <option value="azureopenai">Azure OpenAI</option>
+          <option value="anthropic">Anthropic</option>
+          <option value="gemini">Gemini</option>
+        </select>
+
+        <label for="api-url">API URL:</label>
+        <input type="url" id="api-url" placeholder="e.g. https://api.openai.com/v1/chat/completions" />
+
+        <label for="api-key">API Key:<span class="required">*</span></label>
+        <input type="password" id="api-key" placeholder="Enter your API key" required />
+
+        <label for="model">Model:<span class="required">*</span></label>
+        <input type="text" id="model" placeholder="gpt-3.5-turbo" required />
+
+        <label for="temperature">Temperature (0-1):</label>
+        <input type="number" id="temperature" value="0.5" min="0" max="1" step="0.1" />
+
+        <label for="prompt">Prompt (optional):</label>
+        <textarea id="prompt" rows="3" placeholder="Custom system prompt"></textarea>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="theme.js"></script>
+  <script>
+    // Generate or get visitor ID from localStorage
+    function getVisitorId() {
+      let visitorId = localStorage.getItem("visitorId");
+      return visitorId;
+    }
+
+    const visitorId = getVisitorId();
+
+    // Fetch and show visitor count
     fetch("/api/visitor/count")
       .then(res => res.json())
       .then(data => {
         document.getElementById("visitorCount").innerText = data.count;
       });
-  </script> -->
-
-      <script>
-        // Generate or get visitor ID from localStorage
-        function getVisitorId() {
-          let visitorId = localStorage.getItem("visitorId");
-          return visitorId;
-        }
-
-        const visitorId = getVisitorId();
-
-        // Fetch and show visitor count
-        fetch("/api/visitor/count")
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById("visitorCount").innerText = data.count;
-          });
-      </script>
+  </script>
 
 </body>
 

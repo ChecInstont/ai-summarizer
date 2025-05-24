@@ -35,7 +35,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, Header, HTTPException
 from app.schemas.models import SummarizeRequest
 from app.dependencies import get_db
-from app.services.llm_providers import summarize_with_langchain
+from app.services.summarize import summarize_with_langchain
 
 router = APIRouter()
 

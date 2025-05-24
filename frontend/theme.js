@@ -1,6 +1,10 @@
 const toggleBtn = document.getElementById("themeToggle");
-const menuBtn = document.getElementById("menuBtn");
+const menuBtnLeft = document.getElementById("menuBtnLeft");
 const sidebar = document.getElementById("sidebar");
+const rightSidebar = document.getElementById('ai-config');
+const menuBtnRight = document.getElementById('menuBtnRight');
+
+
 
 function setTheme(mode) {
   document.body.className = mode;
@@ -16,9 +20,14 @@ toggleBtn?.addEventListener("click", () => {
 
 const main = document.querySelector(".main");
 
-menuBtn?.addEventListener("click", () => {
+menuBtnLeft?.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   main.classList.toggle("with-sidebar");
+});
+
+menuBtnRight.addEventListener('click', () => {
+  rightSidebar.classList.toggle('open');
+  main.classList.toggle("with-ai-config-sidebar");
 });
 
 

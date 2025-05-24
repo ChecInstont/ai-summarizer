@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import summarize, upload, history, visitor, delete_route
+from app.routes import summarize, upload, history, visitor, delete_route, chat
 
 
 app = FastAPI(title="AI Summarizer")
@@ -23,6 +23,7 @@ app.include_router(summarize.router, prefix="/api/summarize", tags=["Summarizati
 app.include_router(upload.router, prefix="/api/upload", tags=["File Upload"])
 app.include_router(history.router, prefix="/api/history", tags=["History"])
 app.include_router(visitor.router, prefix="/api/visitor", tags=["Visitor"])
+app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 
 
 # Optional: If you want a specific route to serve index.html explicitly
